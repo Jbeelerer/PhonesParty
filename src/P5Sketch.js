@@ -8,12 +8,6 @@ function P5Sketch() {
     // All the points
 let points = [];
 let mouseDown = false;
-// Are we painting?
-let painting = false;
-// How long until the next circle
-let next = 0;
-// Where are we now and where were we?
-let current;
 let previous;
 
 const reset = (p5) =>{
@@ -37,7 +31,6 @@ const sendData = async (e) => {
   };
 
     const setup = (p5, canvasParentRef) => {
-        current = p5.createVector(0,0);
         previous = p5.createVector(0,0);
         p5.createCanvas(window.innerWidth, window.innerHeight).parent(canvasParentRef);
         p5.background(0, 0, 0);
@@ -65,7 +58,7 @@ const sendData = async (e) => {
             reset(p5);
         } 
         else{
-        if(previous.x != 0){
+        if(previous.x !== 0){
             p5.stroke(255);
             p5.line(previous.x, previous.y, p5.mouseX, p5.mouseY);
         } 
