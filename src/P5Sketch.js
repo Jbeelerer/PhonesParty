@@ -24,19 +24,22 @@ const sendData = async (e) => {
     console.log(points); 
     await set(
       ref(
+
         firebase,
         "stars/" +
-        Date.now()
+        Date.now() 
+
       ),
       points
     );
+    points = [];
+    window.location.reload(false);
   };
 
     const setup = (p5, canvasParentRef) => {
-
         current = p5.createVector(0,0);
         previous = p5.createVector(0,0);
-        p5.createCanvas(400, 700).parent(canvasParentRef);
+        p5.createCanvas(window.innerWidth, window.innerHeight).parent(canvasParentRef);
         p5.background(0, 0, 0);
         p5.rect(0, 0,window.innerWidth, window.innerHeight / 5)
         p5.rect(0,window.innerHeight - ((window.innerHeight / 10)/2),window.innerWidth, window.innerHeight / 10)
@@ -82,7 +85,7 @@ const sendData = async (e) => {
 
     return (
         <>
-        <button className='sendButton' onSubmit={sendData}>Send</button>
+        <button className='sendButton' onSubmit={() => {sendData();}}>Send</button>
         <Sketch setup={setup} draw={draw} mousePressed={mp}/>
         </>
     )
